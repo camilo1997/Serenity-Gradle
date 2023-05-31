@@ -1,0 +1,52 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+
+group = 'com.reto'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+buildscript {
+    repositories {
+        maven {
+            url = uri("https://plugins.gradle.org/m2/")
+        }
+    }
+    dependencies {
+        classpath("net.serenity-bdd:serenity-gradle-plugin:3.2.0")
+    }
+}
+
+ext {
+    serenityVersion = "3.7.1"
+    serenityCucumberVersion = "3.7.1"
+}
+
+task aggregate(type: TestReport) {
+    destinationDir = file("$buildDir/reports/tests/aggregate")
+    reportOn subprojects*.test
+}
+
+dependencies {
+    implementation "net.serenity-bdd:serenity-screenplay:$rootProject.ext.serenityVersion"
+    implementation "net.serenity-bdd:serenity-junit5:$rootProject.ext.serenityVersion"
+    implementation "net.serenity-bdd:serenity-screenplay-rest:$rootProject.ext.serenityVersion"
+    testImplementation "net.serenity-bdd:serenity-cucumber:$rootProject.ext.serenityCucumberVersion"
+    implementation 'net.serenity-bdd:serenity-core:2.5.8'
+    implementation 'com.github.javafaker:javafaker:1.0.2'
+    testImplementation "org.junit.platform:junit-platform-launcher:1.8.2"
+    testImplementation "org.junit.jupiter:junit-jupiter-engine:5.8.2"
+    testImplementation "org.junit.vintage:junit-vintage-engine:5.8.2"
+    testImplementation 'junit:junit:4.13'
+    implementation 'org.json:json:20230227'
+    implementation group: 'net.serenity-bdd', name: 'serenity-screenplay-rest', version: '2.0.70'
+    compileOnly 'org.projectlombok:lombok:1.18.4'
+    annotationProcessor 'org.projectlombok:lombok:1.18.4'
+
+}
+
+test {
+    useJUnitPlatform()
+}
