@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('Clone project') {
             steps {
-                git branch: 'pipeline', credentialsId: 'GIT_CREDENTIAL' ,url: 'https://github.com/camilo1997/Serenity-Gradle.git'
+                git branch: 'develop', credentialsId: 'GIT_CREDENTIAL' ,url: 'https://github.com/camilo1997/Serenity-Gradle.git'
             }
         }
 
