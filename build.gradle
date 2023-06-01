@@ -48,5 +48,13 @@ dependencies {
 }
 
 test {
-    useJUnitPlatform()
+    useJUnitPlatform {
+        excludeTags("disabled")
+    }
+    systemProperties(project.gradle.startParameter.systemPropertiesArgs)
+    testLogging.showStandardStreams = true
+    testLogging.exceptionFormat = 'full'
+    outputs.upToDateWhen { false }
+    finalizedBy('aggregate')
 }
+gradle.startParameter.continueOnFailure = true
