@@ -18,7 +18,7 @@ pipeline {
         }
         stage('Run tests') {
             steps {
-                sh './gradlew clean test'
+                sh './gradlew clean test aggregate'
             }
         }
     }
@@ -26,7 +26,7 @@ pipeline {
         always {
             publishHTML(target: [
                 reportName: 'Serenity',
-                reportDir: 'build/reports/tests/test',
+                reportDir: 'target/site/serenity',
                 reportFiles: 'index.html',
                 keepAll: true,
                 alwaysLinkToLastBuild: true,

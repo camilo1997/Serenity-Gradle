@@ -1,8 +1,15 @@
 apply plugin: 'java'
 apply plugin: 'idea'
+apply plugin: 'net.serenity-bdd.aggregator'
 
 group = 'com.reto'
 version = '1.0-SNAPSHOT'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
@@ -20,14 +27,14 @@ buildscript {
 }
 
 ext {
-    serenityVersion = "3.7.1"
-    serenityCucumberVersion = "3.7.1"
+    serenityVersion = "3.2.0"
+    serenityCucumberVersion = "3.2.0"
 }
 
-task aggregate(type: TestReport) {
-    destinationDir = file("$buildDir/reports/tests/aggregate")
-    reportOn subprojects*.test
-}
+//task aggregate(type: TestReport) {
+//    destinationDir = file("$buildDir/reports/tests/aggregate")
+//    reportOn subprojects*.test
+//}
 
 dependencies {
     implementation "net.serenity-bdd:serenity-screenplay:$rootProject.ext.serenityVersion"
