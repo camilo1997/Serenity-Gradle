@@ -16,7 +16,7 @@ Feature: Create user
     Then I see the response code 400
     And I see the invalid email message
 
-  @CreateUserWithEmailIncorrect
+  @CreateUserWithouEmail
   Scenario: Create user without email
     When I create user without email
     Then I see the response code 400
